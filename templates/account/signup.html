@@ -1,0 +1,150 @@
+{% extends "account/base_entrance.html" %}
+{% load allauth i18n %}
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
+{% block content %}
+    <style>
+        /* Seus estilos CSS personalizados */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: 0;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('../img/fundo.svg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: bottom;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1209px;
+            padding: 0 20px;
+        }
+
+        .area-cadastro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #B13D0C;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        label input {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #FFF9F0;
+            color: #B13D0C;
+            padding: 0 20px;
+            font-size: 18px;
+            border: 1px solid #B13D0C;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            background-color: #B13D0C;
+            color: #FFF;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #994E0D;
+        }
+
+        a {
+            color: #B13D0C;
+            font-size: 18px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .social-accounts {
+            margin-top: 20px;
+        }
+
+        /* Referências às imagens */
+        .area-laranja img,
+        .outras-formas-cadastro img {
+            width: 100px; /* Ajuste conforme necessário */
+            height: auto; /* Ajuste conforme necessário */
+        }
+
+        .pop-up-header img {
+            width: 20px; /* Ajuste conforme necessário */
+            height: auto; /* Ajuste conforme necessário */
+        }
+    </style>
+{% load static %}
+    <div class="container">
+        <div class="area-cadastro">
+            <div class="area-laranja">
+                <img src="{% static 'img/logo.svg' %}" alt="">
+                <h1>{% trans "Welcome" %}</h1>
+                <h3>{% trans "Already have an account?" %}</h3>
+                <a href="{% url 'login' %}">{% trans "Log in" %}</a>
+            </div>
+            <div class="area-transparente">
+                <h1>{% trans "Signup" %}</h1>
+                <h3>{% trans "Sign up with:" %}</h3>
+                <div class="outras-formas-cadastro">
+                    <a href="#" target="_blank">
+                        <img src="{% static 'img/icon-google.svg' %}" alt="">
+                    </a>
+                    <a href="#" target="_blank">
+                        <img src="{% static 'img/icon-apple.svg' %}" alt="">
+                    </a>
+                    <a href="#" target="_blank">
+                        <img src="{% static 'img/icon-facebook.svg' %}" alt="">
+                    </a>
+                </div>
+                <form method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">{% trans "Sign Up" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <title>Caça Receita</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="area-login">
+            <div class="area-laranja">
+                <img src="/static/img/logo.svg/" alt="logo">
+                <h1>Bem vindo</h1>
+                <h3>Novo login?</h3>
+                <a href="{% url 'cadastro' %}">Crie sua conta</a>
+            </div>
+            <div class="area-transparente">
+                <h1>Login</h1>
+                <form id="loginForm" method="post" action="/venv/Lib/site-packages/allauth/account/urls.py/account_login">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <a href="/venv/Lib/site-packages/allauth/account/urls.py/account_reset_password">Esqueci a senha</a>
+                    <button id="entrar" type="submit" disabled>Entrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loginForm').addEventListener('input', function() {
+                var username = document.getElementById('user').value;
+                var password = document.getElementById('password').value;
+                var entrarButton = document.getElementById('entrar');
+    
+                if (username.trim() !== '' && password.trim() !== '') {
+                    entrarButton.removeAttribute('disabled');
+                } else {
+                    entrarButton.setAttribute('disabled', 'disabled');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
